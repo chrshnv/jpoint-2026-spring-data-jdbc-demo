@@ -1,0 +1,48 @@
+import org.springframework.boot.gradle.tasks.run.BootRun
+
+plugins {
+	java
+	id("org.springframework.boot") version "4.0.2"
+	id("io.spring.dependency-management") version "1.1.7"
+	id("org.graalvm.buildtools.native") version "0.11.4"
+}
+
+group = "ltd.chrshnv"
+version = "0.0.1-SNAPSHOT"
+description = "Demo project for Spring Boot"
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+
+	runtimeOnly("org.postgresql:postgresql")
+	testRuntimeOnly("com.h2database:h2")
+	testImplementation("org.springframework.boot:spring-boot-starter-data-jdbc-test")
+	testImplementation("org.springframework.boot:spring-boot-testcontainers")
+	testImplementation("org.testcontainers:testcontainers-postgresql")
+
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+
+	if (project.hasProperty("aot")) {
+		jvmArgs("-Dspring.aot.enabled=true")
+	}
+}
+
+tasks.named<BootRun>("bootRun") {
+	if (project.hasProperty("aot")) {
+		jvmArgs("-Dspring.aot.enabled=true")
+	}
+}
