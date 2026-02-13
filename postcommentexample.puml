@@ -1,0 +1,14 @@
+@startuml
+class Post {
+	id
+	title
+	content
+}
+
+class Comment {
+	content
+	post_id
+}
+
+Post *-- Comment: post_id
+@enduml
