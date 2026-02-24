@@ -1,7 +1,10 @@
 package ltd.chrshnv.jpoint_2026_demo.singlequeryloading.entity;
 
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.UUID;
 
 @Table("comment")
 public class Comment {

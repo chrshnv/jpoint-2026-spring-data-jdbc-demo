@@ -1,8 +1,10 @@
 @startuml
+namespace PostAggregate {
 class Post {
 	id
 	title
 	content
+	author_id
 }
 
 class Comment {
@@ -11,4 +13,14 @@ class Comment {
 }
 
 Post *-- Comment: post_id
+}
+namespace AuthorAggregate {
+class Author {
+id
+first_name
+last_name
+}
+
+Author o-- Post: author_id
+}
 @enduml

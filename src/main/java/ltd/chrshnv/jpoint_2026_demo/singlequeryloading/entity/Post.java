@@ -1,12 +1,14 @@
 package ltd.chrshnv.jpoint_2026_demo.singlequeryloading.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Table("post")
 public class Post {
@@ -23,9 +25,13 @@ public class Post {
 	@MappedCollection(idColumn = "post_id")
 	private Set<Comment> comments = new LinkedHashSet<>();
 
-	public Post(String title, String content) {
+	@Column("author_id")
+	private AggregateReference<Author, UUID> author;
+
+	public Post(String title, String content, AggregateReference<Author, UUID> author) {
 		this.title = title;
 		this.content = content;
+		this.author = author;
 	}
 
 	public Long getId() {
@@ -58,5 +64,13 @@ public class Post {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public AggregateReference<Author, UUID> getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(AggregateReference<Author, UUID> author) {
+		this.author = author;
 	}
 }
