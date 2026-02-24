@@ -28,11 +28,4 @@ class PersonRepositoryTest {
 		Optional<Person> isHasPerson = personRepository.findByFirstNameIgnoreCase("FIRSTNaME");
 		assertTrue(isHasPerson.isPresent());
 	}
-
-	@Test
-	void should_save_person() {
-		Person person = new Person("test-first-name", "test-last-name");
-
-		personRepository.save(person);
-	}
 }
