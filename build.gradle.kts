@@ -1,11 +1,13 @@
+import org.springframework.boot.gradle.plugin.SpringBootAotPlugin
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
 	java
 	id("org.springframework.boot") version "4.0.2"
 	id("io.spring.dependency-management") version "1.1.7"
-	id("org.graalvm.buildtools.native") version "0.11.4"
 }
+
+project.plugins.apply(SpringBootAotPlugin::class.java)
 
 group = "ltd.chrshnv"
 version = "0.0.1-SNAPSHOT"
@@ -25,7 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 
 	runtimeOnly("org.postgresql:postgresql")
-	testRuntimeOnly("com.h2database:h2")
+	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-data-jdbc-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.testcontainers:testcontainers-postgresql")
