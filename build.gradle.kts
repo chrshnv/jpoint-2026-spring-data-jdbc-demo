@@ -1,13 +1,11 @@
-import org.springframework.boot.gradle.plugin.SpringBootAotPlugin
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
 	java
-	id("org.springframework.boot") version "4.0.2"
+	id("org.springframework.boot") version "4.0.3"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("org.springframework.boot.aot") version "4.0.3"
 }
-
-project.plugins.apply(SpringBootAotPlugin::class.java)
 
 group = "ltd.chrshnv"
 version = "0.0.1-SNAPSHOT"
