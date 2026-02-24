@@ -30,3 +30,26 @@ CREATE TABLE photo_tag (
 	photo_key bigint,
 	CONSTRAINT fk_photo_tag_on_photo FOREIGN KEY(photo_id) REFERENCES photo(id)
 );
+
+CREATE TABLE product(
+	idx uuid NOT NULL,
+	sku varchar(255) NOT NULL,
+	title varchar(255) NOT NULL,
+	price double precision NOT NULL,
+	CONSTRAINT pk_product PRIMARY KEY (idx, sku)
+);
+
+CREATE TABLE order_(
+	id uuid NOT NULL,
+	price double precision NOT NULL,
+	CONSTRAINT pk_order PRIMARY KEY (id)
+);
+
+CREATE TABLE order_item(
+	product_idx uuid NOT NULL,
+	product_sku varchar(255) NOT NULL,
+	order__id uuid NOT NULL,
+	quantity bigint NOT NULL,
+	CONSTRAINT fk_order_item_on_product FOREIGN KEY (product_idx, product_sku) REFERENCES product(idx, sku),
+	CONSTRAINT fk_order_item_on_order FOREIGN KEY (order__id) REFERENCES order_(id)
+);
