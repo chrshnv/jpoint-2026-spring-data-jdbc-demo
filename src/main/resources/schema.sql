@@ -36,7 +36,7 @@ CREATE TABLE product(
 	sku varchar(255) NOT NULL,
 	title varchar(255) NOT NULL,
 	price double precision NOT NULL,
-	CONSTRAINT pk_product PRIMARY KEY (idx, sku)
+	CONSTRAINT pk_product PRIMARY KEY (internal_id, sku)
 );
 
 CREATE TABLE order_(
