@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import java.util.UUID;
 
 public record ProductId(
-	@Column("idx") UUID idx,
+	@Column("internal_id") UUID internalId,
 	@Column("sku") String sku
 ) {
 }
