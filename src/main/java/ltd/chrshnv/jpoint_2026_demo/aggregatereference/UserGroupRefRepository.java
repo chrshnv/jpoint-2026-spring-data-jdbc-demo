@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface UserGroupRefRepository extends ListCrudRepository<UserGroupRef, UUID> {
 	List<UserGroupRef> findByUser(AggregateReference<User, UserId> user);
+
+	List<UserGroupRef> findByUser_Username(String username);
 }

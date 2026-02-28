@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserGroupRefEmbeddedRepository extends ListCrudRepository<UserGroupRefEmbedded, UUID> {
-	List<UserGroupRefEmbedded> findByUserId_FirstName(String firstName);
+	List<UserGroupRefEmbedded> findByUserId_Username(String firstName);
 }

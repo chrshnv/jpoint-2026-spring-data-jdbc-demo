@@ -53,3 +53,10 @@ CREATE TABLE order_item(
 	CONSTRAINT fk_order_item_on_product FOREIGN KEY (product_internal_id, product_sku) REFERENCES product(internal_id, sku),
 	CONSTRAINT fk_order_item_on_order FOREIGN KEY (order__id) REFERENCES order_(id)
 );
+
+CREATE TABLE user_group_ref_embedded(
+	id uuid NOT NULL,
+	user_group varchar(255) NOT NULL,
+	user_username varchar(255) NOT NULL,
+	user_email varchar(255) NOT NULL
+);

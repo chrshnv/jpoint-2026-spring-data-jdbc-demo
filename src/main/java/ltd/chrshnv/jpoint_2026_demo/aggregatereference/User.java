@@ -19,6 +19,14 @@ public class User {
 		this.phone = phone;
 	}
 
+	public UserId getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UserId userId) {
+		this.userId = userId;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
