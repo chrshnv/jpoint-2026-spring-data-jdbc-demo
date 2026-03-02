@@ -32,11 +32,11 @@ CREATE TABLE photo_tag (
 );
 
 CREATE TABLE product(
-	internal_id uuid NOT NULL,
+	external_id uuid NOT NULL,
 	sku varchar(255) NOT NULL,
 	title varchar(255) NOT NULL,
 	price double precision NOT NULL,
-	CONSTRAINT pk_product PRIMARY KEY (internal_id, sku)
+	CONSTRAINT pk_product PRIMARY KEY (external_id, sku)
 );
 
 CREATE TABLE order_(
@@ -46,17 +46,10 @@ CREATE TABLE order_(
 );
 
 CREATE TABLE order_item(
-	product_internal_id uuid NOT NULL,
+	product_external_id uuid NOT NULL,
 	product_sku varchar(255) NOT NULL,
 	order__id uuid NOT NULL,
 	quantity bigint NOT NULL,
-	CONSTRAINT fk_order_item_on_product FOREIGN KEY (product_internal_id, product_sku) REFERENCES product(internal_id, sku),
+	CONSTRAINT fk_order_item_on_product FOREIGN KEY (product_external_id, product_sku) REFERENCES product(external_id, sku),
 	CONSTRAINT fk_order_item_on_order FOREIGN KEY (order__id) REFERENCES order_(id)
-);
-
-CREATE TABLE user_group_ref_embedded(
-	id uuid NOT NULL,
-	user_group varchar(255) NOT NULL,
-	user_username varchar(255) NOT NULL,
-	user_email varchar(255) NOT NULL
 );

@@ -1,14 +1,19 @@
 @startuml
+class ProductId {
+	String externalId
+	String sku
+}
+
 namespace OrderAggregate {
 	Order *-- OrderItem : items
 
     class Order {
-    	List<OrderItem> items,
+    	List<OrderItem> items
     	Double price
     }
 
     class OrderItem {
-    	ProductId productId,
+    	ProductId productId
     	Long quantity
     }
 }
@@ -17,6 +22,7 @@ namespace ProductAggregate {
 	Product o-- OrderItem: productId
 
 	class Product {
+		ProductId id
 		String title
 		Double price
 	}

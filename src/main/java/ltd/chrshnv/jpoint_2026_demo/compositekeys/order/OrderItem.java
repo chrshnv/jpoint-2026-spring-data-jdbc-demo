@@ -8,7 +8,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table("order_item")
 public class OrderItem {
-	@Column("product_id")
 	private AggregateReference<Product, ProductId> product;
 
 	@Column("quantity")
