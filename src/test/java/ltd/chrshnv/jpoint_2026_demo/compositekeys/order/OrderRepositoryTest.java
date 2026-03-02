@@ -13,6 +13,8 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class OrderRepositoryTest {
 
@@ -24,6 +26,8 @@ class OrderRepositoryTest {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired private OrderItemRepository orderItemRepository;
 
 	UUID productIdx = null;
 
@@ -44,10 +48,15 @@ class OrderRepositoryTest {
 	}
 
 	@Test
+	void should_not_crash() {
+		assertDoesNotThrow(() -> orderItemRepository.findAllByProduct_ExternalId(productIdx));
+	}
+
+	@Test
 	void should_create_order() {
 		ProductId productId = new ProductId(productIdx, "test-sku");
 
-		OrderItem orderItem = new OrderItem(AggregateReference.to(productId), 10L);
+		OrderItem orderItem = new OrderItem(productId, 10L);
 		Order order = new Order(UUID.randomUUID(), 1.0);
 		order.getOrderItems().add(orderItem);
 
