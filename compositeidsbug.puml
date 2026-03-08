@@ -1,9 +1,4 @@
 @startuml
-class ProductId {
-	String externalId
-	String sku
-}
-
 namespace OrderAggregate {
 	Order *-- OrderItem : items
 
@@ -26,5 +21,11 @@ namespace ProductAggregate {
 		String title
 		Double price
 	}
+
+	class ProductId {
+    	String externalId
+    	String sku
+    }
+
 }
 @enduml

@@ -1,4 +1,5 @@
 @startuml
+namespace PostAggregate {
 class Post {
 	id
 	title
@@ -11,4 +12,5 @@ class Comment {
 }
 
 Post *-- Comment: post_id
+}
 @enduml
