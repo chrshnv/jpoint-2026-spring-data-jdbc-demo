@@ -1,0 +1,17 @@
+@startuml
+partition Buildtime {
+start
+- Сканирование классов
+- Создание BeanDefinition'ов
+- Создание прокси
+stop
+}
+partition Runtime {
+start
+- Запуск приложения
+- Создание bean'ов через конструктор
+- Dependency Injection
+- Запуск PostConstruct методов
+stop
+}
+@enduml

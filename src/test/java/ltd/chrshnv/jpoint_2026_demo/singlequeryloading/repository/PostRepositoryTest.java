@@ -21,6 +21,9 @@ class PostRepositoryTest {
 		Post post = new Post("test-post-title", "test-post-content");
 		postRepository.save(post);
 
+		Post post2 = new Post("test-post-title-2", "test-post-content-2");
+		postRepository.save(post2);
+
 		postRepository.findAll();
 	}
 }
