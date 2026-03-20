@@ -2,8 +2,8 @@
 partition Buildtime {
 start
 - Сканирование классов
-- Создание BeanDefinition'ов
 - Dependency Injection
+- Создание BeanDefinition'ов
 - Создание прокси
 stop
 }
