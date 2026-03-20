@@ -11,6 +11,13 @@ class Comment {
 	post_id
 }
 
+class Photo {
+	title
+	content
+	post_id
+}
+
 Post *-- Comment: post_id
+Post *-- Photo: post_id
 }
 @enduml
