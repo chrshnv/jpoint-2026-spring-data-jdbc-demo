@@ -23,6 +23,9 @@ public class Post {
 	@MappedCollection(idColumn = "post_id")
 	private Set<Comment> comments = new LinkedHashSet<>();
 
+	@MappedCollection(idColumn = "post_id")
+	private Set<Photo> photos = new LinkedHashSet<>();
+
 	public Post(String title, String content) {
 		this.title = title;
 		this.content = content;
@@ -58,5 +61,13 @@ public class Post {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(Set<Photo> photos) {
+		this.photos = photos;
 	}
 }

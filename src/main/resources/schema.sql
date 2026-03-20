@@ -18,6 +18,13 @@ CREATE TABLE comment (
 	CONSTRAINT fk_comment_on_post FOREIGN KEY(post_id) REFERENCES post(id)
 );
 
+CREATE TABLE post_photo(
+	title varchar(255),
+	content varchar(255),
+	post_id bigint,
+	CONSTRAINT fk_post_photo_on_post FOREIGN KEY(post_id) REFERENCES post(id)
+);
+
 CREATE TABLE product(
 	external_id uuid NOT NULL,
 	sku varchar(255) NOT NULL,
