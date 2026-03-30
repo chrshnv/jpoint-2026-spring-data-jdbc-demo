@@ -9,3 +9,5 @@ spring:
 logging:
     level:
         org.springframework.jdbc: DEBUG
+    pattern:
+        console: "%msg%n"
