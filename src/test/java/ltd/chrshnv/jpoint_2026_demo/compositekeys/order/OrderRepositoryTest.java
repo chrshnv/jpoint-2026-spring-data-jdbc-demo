@@ -35,8 +35,15 @@ class OrderRepositoryTest {
 	void setUp() {
 		productIdx = UUID.randomUUID();
 
-		ProductId productId = new ProductId(productIdx, "test-sku");
-		Product product = new Product(productId, "test-title", 10.0);
+		ProductId productId = new ProductId(
+			productIdx,
+			"test-sku"
+		);
+		Product product = new Product(
+			productId,
+			"test-title",
+			10.0
+		);
 
 		jdbcAggregateTemplate.insert(product);
 	}
@@ -47,16 +54,17 @@ class OrderRepositoryTest {
 		productRepository.deleteAll();
 	}
 
-	/*@Test
-	void should_find_by_composite_key_part() {
-		assertDoesNotThrow(() -> orderItemRepository.findAllByProduct_ExternalId(productIdx));
-	}*/
-
 	@Test
 	void should_create_order() {
-		ProductId productId = new ProductId(productIdx, "test-sku");
+		ProductId productId = new ProductId(
+			productIdx,
+			"test-sku"
+		);
 
-		OrderItem orderItem = new OrderItem(AggregateReference.to(productId), 10L);
+		OrderItem orderItem = new OrderItem(
+			AggregateReference.to(productId),
+			10L
+		);
 		Order order = new Order(UUID.randomUUID(), 1.0);
 		order.getOrderItems().add(orderItem);
 
