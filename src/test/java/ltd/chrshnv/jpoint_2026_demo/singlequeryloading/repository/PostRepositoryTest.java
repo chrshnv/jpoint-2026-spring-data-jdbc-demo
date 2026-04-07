@@ -27,11 +27,20 @@ class PostRepositoryTest {
 	@Test
 	void should_find_all() {
 		UUID id = UUID.randomUUID();
-		Author author = new Author(id, "test-post-author-first-name", "test-post-author-last-name");
+		Author author = new Author(
+			id,
+			"test-post-author-first-name",
+			"test-post-author-last-name"
+		);
 
 		jdbcAggregateTemplate.insert(author);
 
-		Post post = new Post("test-post-title", "test-post-content", AggregateReference.to(id));
+		Post post = new Post(
+			"test-post-title",
+			"test-post-content",
+			AggregateReference.to(id)
+		);
+
 		postRepository.save(post);
 
 		postRepository.findAll();
