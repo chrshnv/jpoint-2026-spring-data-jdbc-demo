@@ -16,10 +16,15 @@ class PersonRepositoryTest {
 
 	@Test
 	void should_find_person_ignore_case() {
-		Person person = new Person("firstname", "lastname");
+		Person person = new Person(
+			"firstname",
+			"lastname"
+		);
 		personRepository.save(person);
 
-		Optional<Person> isHasPerson = personRepository.findByFirstNameIgnoreCase("FIRSTNaME");
+		Optional<Person> isHasPerson = personRepository
+			.findByFirstNameIgnoreCase("FIRSTNaME");
+
 		assertTrue(isHasPerson.isPresent());
 	}
 }
