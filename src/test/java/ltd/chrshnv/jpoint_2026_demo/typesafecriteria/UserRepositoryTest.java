@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.core.PropertyPath;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -43,7 +44,7 @@ class UserRepositoryTest {
 		userRepository.save(user);
 
 		Criteria criteria = Criteria
-			.where("username")
+			.where(User::getUsername)
 			.is("TestUsername");
 
 		Query query = Query.query(criteria);
@@ -80,7 +81,7 @@ class UserRepositoryTest {
 		userRepository.save(secondUser);
 
 		Sort sort = Sort
-			.by("id")
+			.by(User::getId)
 			.descending();
 
 		List<User> result = jdbcAggregateTemplate
@@ -107,7 +108,10 @@ class UserRepositoryTest {
 		userRepository.save(user);
 
 		Criteria criteria = Criteria
-			.where("contact.telegram")
+			.where(
+				PropertyPath.of(User::getContact)
+					.then(Contact::telegram)
+			)
 			.is("TestTgram");
 
 		Query query = Query.query(criteria);
