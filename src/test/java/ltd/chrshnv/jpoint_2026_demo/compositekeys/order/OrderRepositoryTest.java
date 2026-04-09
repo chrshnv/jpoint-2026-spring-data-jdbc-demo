@@ -56,7 +56,7 @@ class OrderRepositoryTest {
 	}
 
 	@Test
-	void should_find_order_item_in() {
+	void should_not_find_order_item_in() {
 		UUID productIdx2 = UUID.randomUUID();
 		ProductId productId2 = new ProductId(
 			productIdx2,
@@ -70,12 +70,16 @@ class OrderRepositoryTest {
 		);
 		jdbcAggregateTemplate.insert(product2);
 
-		List<ProductId> query = List.of(
-			new ProductId(
-				productIdx,
-				"test-sku"
+		List<AggregateReference<Product, ProductId>> query = List.of(
+			AggregateReference.to(
+				new ProductId(
+					productIdx,
+					"test-sku"
+				)
 			),
-			productId2
+			AggregateReference.to(
+				productId2
+			)
 		);
 
 		List<OrderItem> result = orderItemRepository
@@ -92,7 +96,7 @@ class OrderRepositoryTest {
 		);
 
 		OrderItem orderItem = new OrderItem(
-			productId,
+			AggregateReference.to(productId),
 			10L
 		);
 		Order order = new Order(UUID.randomUUID(), 1.0);

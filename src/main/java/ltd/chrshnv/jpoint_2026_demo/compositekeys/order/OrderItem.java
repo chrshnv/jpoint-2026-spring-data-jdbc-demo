@@ -9,13 +9,12 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table("order_item")
 public class OrderItem {
-	@Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
-	private ProductId product;
+	private AggregateReference<Product, ProductId> product;
 
 	@Column("quantity")
 	private Long quantity;
 
-	public OrderItem(ProductId product, Long quantity) {
+	public OrderItem(AggregateReference<Product, ProductId> product, Long quantity) {
 		this.product = product;
 		this.quantity = quantity;
 	}
@@ -28,8 +27,8 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public ProductId getProduct() {
+	public AggregateReference<Product, ProductId> getProduct() {
 		return product;
 	}
 
-	public void setProduct(ProductId product) { this.product = product; } }
+	public void setProduct(AggregateReference<Product, ProductId> product) { this.product = product; } }
