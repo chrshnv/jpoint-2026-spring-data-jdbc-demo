@@ -33,10 +33,10 @@ CREATE TABLE order_(
 );
 
 CREATE TABLE order_item(
-	product_external_id uuid NOT NULL,
-	product_sku varchar(255) NOT NULL,
+	external_id uuid NOT NULL,
+	sku varchar(255) NOT NULL,
 	order__id uuid NOT NULL,
 	quantity bigint NOT NULL,
-	CONSTRAINT fk_order_item_on_product FOREIGN KEY (product_external_id, product_sku) REFERENCES product(external_id, sku),
+	CONSTRAINT fk_order_item_on_product FOREIGN KEY (external_id, sku) REFERENCES product(external_id, sku),
 	CONSTRAINT fk_order_item_on_order FOREIGN KEY (order__id) REFERENCES order_(id)
 );
