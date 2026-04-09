@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,6 +56,35 @@ class OrderRepositoryTest {
 	}
 
 	@Test
+	void should_find_order_item_in() {
+		UUID productIdx2 = UUID.randomUUID();
+		ProductId productId2 = new ProductId(
+			productIdx2,
+			"test-sku-2"
+		);
+
+		Product product2 = new Product(
+			productId2,
+			"test-title-2",
+			10.0
+		);
+		jdbcAggregateTemplate.insert(product2);
+
+		List<ProductId> query = List.of(
+			new ProductId(
+				productIdx,
+				"test-sku"
+			),
+			productId2
+		);
+
+		List<OrderItem> result = orderItemRepository
+			.findByProductIn(query);
+
+		assertTrue(result.isEmpty());
+	}
+
+	@Test
 	void should_create_order() {
 		ProductId productId = new ProductId(
 			productIdx,
@@ -62,7 +92,7 @@ class OrderRepositoryTest {
 		);
 
 		OrderItem orderItem = new OrderItem(
-			AggregateReference.to(productId),
+			productId,
 			10L
 		);
 		Order order = new Order(UUID.randomUUID(), 1.0);
